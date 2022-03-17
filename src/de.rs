@@ -795,8 +795,8 @@ where
     {
         if name == CID_SERDE_PRIVATE_IDENTIFIER {
             // It's only valid if there is really an encoded CID.
-            match self.parse_u16() {
-                Ok(CBOR_TAGS_MAJOR_TYPE_AND_CID) => self.parse_cid(visitor),
+            match self.parse_u16()? {
+                CBOR_TAGS_MAJOR_TYPE_AND_CID => self.parse_cid(visitor),
                 _ => Err(self.error(ErrorCode::UnexpectedCode)),
             }
         } else {
